@@ -4,6 +4,8 @@ vs code extension that serves to simplify the creation of view models in Angular
 
 ![image](./images/logo.png)
 
+[Link of the Vscode marketplace extension.](https://marketplace.visualstudio.com/items?itemName=Shunnior.bc-view-model-generator) 
+
 ## Features
 
 Extension for Bancolombia developers to create view models services in angular by a faster way.
