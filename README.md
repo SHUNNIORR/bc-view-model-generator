@@ -1,6 +1,6 @@
 # Angular view model generator
 vs code extension that serves to simplify the creation of view models in Angular. It was initially intended for the Bancolombia developers, but it can be used in any Angular project.
-
+![image](./images/logo.png)
 ## Features
 
 Extension for Bancolombia developers to create view models services in angular by a faster way.
