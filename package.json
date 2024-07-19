@@ -1,6 +1,6 @@
 {
-  "name": "svp-schematics",
-  "displayName": "SVP-Schematics",
+  "name": "clean-arq-schematics",
+  "displayName": "Clean architecture schematics",
   "publisher": "Shunnior",
   "description": "Vs code extension that serves to simplify the creation of view models in Angular. It was initially intended for the Bancolombia developers, but it can be used in any Angular project.",
   "icon": "./images/logo.png",
@@ -20,14 +20,14 @@
   "contributes": {
         "commands": [
           {
-            "command": "svp-schematics.showOptions",
+            "command": "clean-arq-schematics.showOptions",
             "title": "SVP schematics"
         }
         ],
         "menus": {
             "explorer/context": [
                 {
-                    "command": "svp-schematics.showOptions",
+                    "command": "clean-arq-schematics.showOptions",
                     "when": "explorerResourceIsFolder",
                     "group": "navigation"
                 }

@@ -7,9 +7,9 @@ const vscode = require('vscode');
  * @param {vscode.ExtensionContext} context
  */
 function activate(context) {
-    console.log('Congratulations, your extension "svp-schematics" is now active!');
+    console.log('Congratulations, your extension "clean-arq-schematics" is now active!');
 
-    const disposable = vscode.commands.registerCommand('svp-schematics.showOptions', async (uri) => {
+    const disposable = vscode.commands.registerCommand('clean-arq-schematics.showOptions', async (uri) => {
         const options = ["New view-model", "Generate clean architecture template"];
         const selection = await vscode.window.showQuickPick(options, {
             placeHolder: "Select an option"

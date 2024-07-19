@@ -1,5 +1,5 @@
-# Angular view model generator
-vs code extension that serves to simplify the creation of view models and clean architecture templates in Angular. It was initially intended for the Bancolombia developers, but it can be used in any Angular project.
+# Angular clean arquitecture schematics
+vs code extension that serves to simplify the creation of view models and clean architecture templates in Angular.
 
 
 ![image](./images/logo.png)
