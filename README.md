@@ -8,7 +8,7 @@ vs code extension that serves to simplify the creation of view models and clean 
 
 ## Features
 
-Extension for Bancolombia developers to optimice the developer time of the SVP team by a faster way.
+Extension to simplify the creation of view models and clean architecture templates
 
 ## Usage
 
@@ -16,7 +16,7 @@ First of all, it is used in Angular projects with the Jest testing library.
 
 1. Position the cursor over the folder we want to use and press right click
 
-2. Within the menu the "SVP schematics" option will be displayed, we will click on it
+2. Within the menu the "Clean Arq. schematics" option will be displayed, we will click on it
 
 3. A list of actions willbe displayed, choose one of them and enjoy!
 
