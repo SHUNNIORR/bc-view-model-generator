@@ -20,3 +20,11 @@
 ## [0.0.4] - 2024-07-15
 ### Added
 - Added github repository
+
+## [0.0.5] - 2024-07-19
+### Added
+- Added new feature: Generate clean architecture
+
+## [0.0.6] - 2024-07-19
+### Added
+- Added new logo and readme info
