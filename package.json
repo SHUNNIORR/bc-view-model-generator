@@ -21,7 +21,7 @@
         "commands": [
           {
             "command": "clean-arq-schematics.showOptions",
-            "title": "SVP schematics"
+            "title": "Clean Arq. schematics"
         }
         ],
         "menus": {

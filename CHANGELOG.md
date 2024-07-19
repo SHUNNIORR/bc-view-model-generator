@@ -28,3 +28,12 @@
 ## [0.0.6] - 2024-07-19
 ### Added
 - Added new logo and readme info
+
+## [0.0.7] - 2024-07-19
+### Added
+- Added new logo and readme info
+- New Name 
+
+## [0.0.8] - 2024-07-19
+### Added
+- Edit menu option name to Clean arq. schematics
