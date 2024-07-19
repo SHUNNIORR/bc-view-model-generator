@@ -6,9 +6,9 @@
   "icon": "./images/logo.png",
   "repository": {
     "type": "git",
-    "directory": "https://github.com/SHUNNIORR/bc-view-model-generator"
+    "url": "https://github.com/SHUNNIORR/bc-view-model-generator"
   },
-  "version": "0.0.4",
+  "version": "0.0.5",
   "engines": {
     "vscode": "^1.91.0"
   },
