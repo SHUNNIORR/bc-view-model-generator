@@ -1,42 +1,31 @@
 const vscode = require('vscode');
 const fs = require('fs');
 const path = require('path');
-
-/**
- * @param {vscode.ExtensionContext} context
- */
-function activate(context) {
-    console.log('Congratulations, your extension "bc-view-model-generator" is now active!');
-
-    const disposable = vscode.commands.registerCommand('bc-view-model-generator.createViewModel', async (uri) => {
-        const fileName = await vscode.window.showInputBox({
-            placeHolder: "Enter the name for the view model file"
-        });
-
-        if (!fileName) {
-            vscode.window.showErrorMessage("File name cannot be empty");
-            return;
-        }
-
-        const folderPath = uri.fsPath;
-        const fileExtension = 'view-model';
-        const fullFileName = `${fileName}.${fileExtension}.ts`;
-        const fullPath = path.join(folderPath, fullFileName);
-        const testFullFileName = `${fileName}.${fileExtension}.spec.ts`;
-        const testFullPath = path.join(folderPath, testFullFileName);
-        const className = toCamelCase(fileName) + 'ViewModel';
-        const content = generateViewModelContent(fileName, className, fileExtension);
-
-        fs.writeFileSync(fullPath, content.viewModelContent);
-        fs.writeFileSync(testFullPath, content.testViewModelContent);
-
-        vscode.window.showInformationMessage(`Archivo ${fullFileName} y su archivo de prueba ${testFullFileName} generado exitosamente en ${folderPath}`);
+async function createViewModel(uri) {
+    const fileName = await vscode.window.showInputBox({
+        placeHolder: "Enter the name for the view model file"
     });
 
-    context.subscriptions.push(disposable);
-}
+    if (!fileName) {
+        vscode.window.showErrorMessage("File name cannot be empty");
+        return;
+    }
 
-function deactivate() {}
+    const folderPath = uri.fsPath;
+    const fileExtension = 'view-model';
+    const fullFileName = `${fileName}.${fileExtension}.ts`;
+    const fullPath = path.join(folderPath, fullFileName);
+    const testFullFileName = `${fileName}.${fileExtension}.spec.ts`;
+    const testFullPath = path.join(folderPath, testFullFileName);
+    const className = toCamelCase(fileName) + 'ViewModel';
+    const content = generateViewModelContent(fileName, className, fileExtension);
+
+    fs.writeFileSync(fullPath, content.viewModelContent);
+    fs.writeFileSync(testFullPath, content.testViewModelContent);
+
+    vscode.window.showInformationMessage(`Archivo ${fullFileName} y su archivo de prueba ${testFullFileName} generado exitosamente en ${folderPath}`);
+
+}
 
 function toCamelCase(input) {
     return input
@@ -94,7 +83,6 @@ describe('${camelCaseFileName}ViewModel', () => {
     };
 }
 
-module.exports = {
-    activate,
-    deactivate
+module.exports ={
+    createViewModel
 }

@@ -1,6 +1,6 @@
 {
-  "name": "bc-view-model-generator",
-  "displayName": "bc-view-model-generator",
+  "name": "svp-schematics",
+  "displayName": "SVP-Schematics",
   "publisher": "Shunnior",
   "description": "Vs code extension that serves to simplify the creation of view models in Angular. It was initially intended for the Bancolombia developers, but it can be used in any Angular project.",
   "icon": "./images/logo.png",
@@ -16,18 +16,18 @@
     "Other"
   ],
   "activationEvents": [],
-  "main": "./extension.js",
+  "main": "./src/extension.js",
   "contributes": {
         "commands": [
-            {
-                "command": "bc-view-model-generator.createViewModel",
-                "title": "New view-model"
-            }
+          {
+            "command": "svp-schematics.showOptions",
+            "title": "SVP schematics"
+        }
         ],
         "menus": {
             "explorer/context": [
                 {
-                    "command": "bc-view-model-generator.createViewModel",
+                    "command": "svp-schematics.showOptions",
                     "when": "explorerResourceIsFolder",
                     "group": "navigation"
                 }
