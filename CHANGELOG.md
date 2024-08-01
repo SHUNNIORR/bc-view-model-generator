@@ -37,3 +37,7 @@
 ## [0.0.8] - 2024-07-19
 ### Added
 - Edit menu option name to Clean arq. schematics
+
+## [0.0.10] - 2024-08-01
+### Added
+- edit version range
