@@ -5,7 +5,7 @@ function generateCleanArchitectureTemplate(uri) {
     const folderPath = uri.fsPath;
     const domainPath = path.join(folderPath, 'domain');
     const applicationPath = path.join(folderPath, 'application');
-    const infrastructurePath = path.join(folderPath, 'infrastructure');
+    const infrastructurePath = path.join(folderPath, 'infraestructure');
     const gatewaysPath = path.join(infrastructurePath, 'gateways'); // Nueva ruta para la carpeta 'gateways'
 
     fs.mkdirSync(domainPath, { recursive: true });

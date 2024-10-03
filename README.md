@@ -24,4 +24,4 @@ First of all, it is used in Angular projects with the Jest testing library.
 
 1. Change the package version to the latest version  "version": "x.x.x",
 2. Run vsce package command to create a new version file
-3. Run vsce pucblish -p <token> to deploy the new version
+3. Run vsce publish -p <token> to deploy the new version
