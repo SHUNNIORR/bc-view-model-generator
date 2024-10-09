@@ -41,3 +41,7 @@
 ## [0.0.10] - 2024-08-01
 ### Added
 - edit version range
+
+## [0.1.0] - 2024-10-03
+### Added
+- Feature createDomain that generates all the files needed for the clean architecture of this domain.

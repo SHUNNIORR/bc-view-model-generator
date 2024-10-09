@@ -1,6 +1,8 @@
 const vscode = require('vscode');
 const fs = require('fs');
 const path = require('path');
+const generateDomainFiles = require('./file-content-templates/domain')
+const generateApplicationFile = require('./file-content-templates/application');
 async function createDomain(uri) {
     const fileName = await vscode.window.showInputBox({
         placeHolder: "Enter the name for the domain file"
@@ -18,7 +20,7 @@ async function createDomain(uri) {
     vscode.window.showInformationMessage(`Carpeta y archivos para el dominio "${fileName}" creados exitosamente en ${folderPath}`);
 }
 
-function createDomainFiles(fileName, folderPath){
+async function createDomainFiles(fileName, folderPath){
     const domainFolderPath = path.join(folderPath, 'domain');
 
     if (!fs.existsSync(domainFolderPath)) {
@@ -29,12 +31,23 @@ function createDomainFiles(fileName, folderPath){
     if (!fs.existsSync(domainDir)) {
         fs.mkdirSync(domainDir);
     }
-  
-    const files = ['gateway', 'errors', 'entity'].map(type => `${fileName}.${type}.ts`);
-    files.forEach(file => {
-      const filePath = path.join(domainDir, file);
-      fs.writeFileSync(filePath, '', 'utf8');
-    });
+
+    try {
+        const files = [
+            { name: `${fileName}.gateway.ts`, content: generateDomainFiles.generateGatewayFile(fileName) },
+            { name: `${fileName}.errors.ts`, content: generateDomainFiles.generateEntityErrorFile(fileName) },
+            { name: `${fileName}.entity.ts`, content: generateDomainFiles.generateEntityDomainFile(fileName) } // Agrega el contenido de la entidad
+        ];
+
+        files.forEach(file => {
+            const filePath = path.join(domainDir, file.name);
+            fs.writeFileSync(filePath, file.content, 'utf8');
+        });
+    } catch (error) {
+        console.error("Error creating domain files:", error);
+        vscode.window.showErrorMessage("Failed to create domain files. Check the console for details.");
+        return;
+    }
 }
 function createApplicationFiles(domainName, folderPath) {
     const applicationFolderPath = path.join(folderPath, 'application');
@@ -48,11 +61,21 @@ function createApplicationFiles(domainName, folderPath) {
         fs.mkdirSync(domainDir);
     }
 
-    const files = ['use-case', 'use-case.spec'].map(type => `${domainName}.${type}.ts`);
-    files.forEach(file => {
-        const filePath = path.join(domainDir, file);
-        fs.writeFileSync(filePath, '', 'utf8');
-    });
+    try {
+        const files = [
+            { name: `${domainName}.usecase.ts`, content: generateApplicationFile.generateUseCaseFile(domainName) },
+            { name: `${domainName}.usecase.spec.ts`, content: generateApplicationFile.generateUseCaseTestFile(domainName) },
+        ];
+
+        files.forEach(file => {
+            const filePath = path.join(domainDir, file.name);
+            fs.writeFileSync(filePath, file.content, 'utf8');
+        });
+    } catch (error) {
+        console.error("Error creating domain files:", error);
+        vscode.window.showErrorMessage("Failed to create domain files. Check the console for details.");
+        return;
+    }
 
 }
 
