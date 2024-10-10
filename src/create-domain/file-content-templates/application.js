@@ -10,7 +10,7 @@ import { ${camelCaseFileName}Gateway } from '../../domain/${fileName}/${fileName
 @Injectable({
   providedIn: 'root',
 })
-export class ${camelCaseFileName}Usecase {
+export class ${camelCaseFileName}UseCase {
   constructor(private gateway: ${camelCaseFileName}Gateway) {}
 
   execute() {
@@ -25,10 +25,10 @@ function generateUseCaseTestFile(fileName) {
 
     return`import { TestBed } from '@angular/core/testing';
 
-import { ${camelCaseFileName}Usecase } from './${fileName}.usecase';
+import { ${camelCaseFileName}UseCase } from './${fileName}.usecase';
 
-describe('${camelCaseFileName}Usecase', () => {
-  let useCase: ${camelCaseFileName}Usecase;
+describe('${camelCaseFileName}UseCase', () => {
+  let useCase: ${camelCaseFileName}UseCase;
   beforeEach(() => {
     TestBed.configureTestingModule({
       providers: [

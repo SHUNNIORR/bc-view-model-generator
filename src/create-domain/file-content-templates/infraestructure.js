@@ -4,7 +4,7 @@ function generateInfraestructureGatewayFile(fileName) {
   const camelCaseFileName = capitalizeFirstLetter(toCamelCase(fileName));
 
   return `import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
 import { ${camelCaseFileName}Gateway } from '../../domain/${fileName}/${fileName}.gateway';
