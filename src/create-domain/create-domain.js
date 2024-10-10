@@ -3,6 +3,7 @@ const fs = require('fs');
 const path = require('path');
 const generateDomainFiles = require('./file-content-templates/domain')
 const generateApplicationFile = require('./file-content-templates/application');
+const generateInfraestructureFiles = require('./file-content-templates/infraestructure');
 async function createDomain(uri) {
     const fileName = await vscode.window.showInputBox({
         placeHolder: "Enter the name for the domain file"
@@ -80,39 +81,81 @@ function createApplicationFiles(domainName, folderPath) {
 }
 
 function createInfraestructureFiles(domainName, folderPath) {
-    const infraestructureFolderPath = path.join(folderPath, 'infraestructure');
+    try {
+        const infraestructureFolderPath = path.join(folderPath, 'infraestructure');
 
-    // Crear la carpeta 'infraestructure' si no existe
-    if (!fs.existsSync(infraestructureFolderPath)) {
-        fs.mkdirSync(infraestructureFolderPath);
+        // Crear la carpeta 'infraestructure' si no existe
+        if (!fs.existsSync(infraestructureFolderPath)) {
+            fs.mkdirSync(infraestructureFolderPath);
+        }
+
+        // Crear la carpeta del dominio dentro de 'infraestructure'
+        const domainDir = path.join(infraestructureFolderPath, domainName);
+        if (!fs.existsSync(domainDir)) {
+            fs.mkdirSync(domainDir);
+        }
+
+        // Crear los archivos dentro de la carpeta del dominio
+        const files = [
+            {
+                name: `http-${domainName}.gateway.ts`,
+                content: generateInfraestructureFiles.generateInfraestructureGatewayFile(domainName),
+            },
+            {
+                name: `http-${domainName}.gateway.spec.ts`,
+                content: generateInfraestructureFiles.generateInfraestructureGatewayTestFile(domainName),
+            },
+            {
+                name: `http-${domainName}.response.ts`,
+                content: generateInfraestructureFiles.generateInfraestructureResponseFile(domainName),
+            }
+        ];
+
+        createFiles(domainDir, files);
+
+        // Crear la subcarpeta 'mappers' dentro de la carpeta del dominio
+        const mappersDir = path.join(domainDir, 'mappers');
+        if (!fs.existsSync(mappersDir)) {
+            fs.mkdirSync(mappersDir);
+        }
+
+        // Crear los archivos dentro de la subcarpeta 'mappers'
+        const mapperFiles = [
+          {
+            name: `http-${domainName}.mapper.ts`,
+            content:
+              generateInfraestructureFiles.generateInfraestructureMapperFile(
+                domainName
+              ),
+          },
+          {
+            name: `http-${domainName}.mapper.spec.ts`,
+            content:
+              generateInfraestructureFiles.generateInfraestructureMapperTestFile(
+                domainName
+              ),
+          },
+        ];
+
+        createFiles(mappersDir, mapperFiles);
+
+        console.log(`Infrastructure files for domain "${domainName}" have been successfully created.`);
+    } catch (error) {
+        console.error(`Error creating infrastructure files: ${error.message}`);
+        vscode.window.showErrorMessage("Failed to create infrastructure files. Check the console for details.");
     }
+}
 
-    // Crear la carpeta del dominio dentro de 'infraestructure'
-    const domainDir = path.join(infraestructureFolderPath, domainName);
-    if (!fs.existsSync(domainDir)) {
-        fs.mkdirSync(domainDir);
-    }
-
-    // Crear los archivos dentro de la carpeta del dominio
-    const files = ['gateway', 'gateway.spec'].map(type => `http-${domainName}.${type}.ts`);
-    files.forEach(file => {
-        const filePath = path.join(domainDir, file);
-        fs.writeFileSync(filePath, '', 'utf8');
+/**
+ * Helper function to create multiple files with empty content in a given directory.
+ * @param {string} directory - The directory where files should be created.
+ * @param {string[]} files - Array of file names to create.
+ */
+function createFiles(directory, files) {
+    files.forEach(({name,content}) => {
+        const filePath = path.join(directory, name);
+        fs.writeFileSync(filePath, content?content:'', 'utf8');
     });
-
-    // Crear la subcarpeta 'mappers' dentro de la carpeta del dominio
-    const mappersDir = path.join(domainDir, 'mappers');
-    if (!fs.existsSync(mappersDir)) {
-        fs.mkdirSync(mappersDir);
-    }
-
-    // Crear los archivos dentro de la subcarpeta 'mappers'
-    const mapperFiles = ['mapper', 'mapper.spec'].map(type => `http-${domainName}.${type}.ts`);
-    mapperFiles.forEach(file => {
-        const filePath = path.join(mappersDir, file);
-        fs.writeFileSync(filePath, '', 'utf8');
-    });
-
 }
 
 module.exports={
