@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.2.1] - 2024-10-10
+### Added
+- Fix bugs when create the application and infraestructure files
+
 ## [0.2.0] - 2024-10-10
 ### Added
 - Feature that writes on the files the content of each one to use the clean architecture directly
